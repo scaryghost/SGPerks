@@ -3,10 +3,10 @@ class SGCommando extends SRVeterancyTypes
 
 static function int GetPerkProgressInt(ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum) {
     if (ReqNum == 0) {
-        FinalInt= 70 * CurLevel;
+        FinalInt= 250 * CurLevel;
         return Min(StatOther.RStalkerKillsStat,FinalInt);
     }
-    FinalInt= 100000 * CurLevel;
+    FinalInt= 500000 * CurLevel;
     return Min(StatOther.RBullpupDamageStat,FinalInt);
 }
 
@@ -117,10 +117,6 @@ static function float GetCostScaling(KFPlayerReplicationInfo KFPRI, class<Pickup
 // Give Extra Items as default
 static function AddDefaultInventory(KFPlayerReplicationInfo KFPRI, Pawn P) {
     KFHumanPawn(P).CreateInventoryVeterancy("KFMod.AK47AssaultRifle", GetCostScaling(KFPRI, class'AK47Pickup'));
-}
-
-static function string GetCustomLevelInfo( byte Level) {
-    return Default.CustomLevelInfo;
 }
 
 defaultproperties {

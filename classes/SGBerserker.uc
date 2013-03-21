@@ -2,7 +2,7 @@ class SGBerserker extends SRVeterancyTypes
     abstract;
 
 static function int GetPerkProgressInt(ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum) {
-    FinalInt= 100000 * CurLevel;
+    FinalInt= 500000 * CurLevel;
     return Min(StatOther.RMeleeDamageStat,FinalInt);
 }
 
@@ -60,10 +60,6 @@ static function AddDefaultInventory(KFPlayerReplicationInfo KFPRI, Pawn P) {
     KFHumanPawn(P).CreateInventoryVeterancy("KFMod.Axe", GetCostScaling(KFPRI, class'AxePickup'));
     if ( KFPRI.Level.Game.GameDifficulty < 5.0 && KFPRI.ClientVeteranSkillLevel == 6 )
         P.ShieldStrength = 100;
-}
-
-static function string GetCustomLevelInfo( byte Level) {
-    return Default.CustomLevelInfo;
 }
 
 defaultproperties {

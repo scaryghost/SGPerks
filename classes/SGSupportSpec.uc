@@ -3,10 +3,10 @@ class SGSupportSpec extends SRVeterancyTypes
 
 static function int GetPerkProgressInt( ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum ) {
     if( ReqNum==0 ) {
-        FinalInt= CurLevel * 5000;
+        FinalInt= CurLevel * 50000;
         return Min(StatOther.RWeldingPointsStat,FinalInt);
     }
-    FinalInt= CurLevel * 100000;
+    FinalInt= CurLevel * 500000;
     return Min(StatOther.RShotgunDamageStat,FinalInt);
 }
 

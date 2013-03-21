@@ -2,7 +2,7 @@ class SGFirebug extends SRVeterancyTypes
     abstract;
 
 static function int GetPerkProgressInt(ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum) {
-    FinalInt= 100000 * CurLevel;
+    FinalInt= 500000 * CurLevel;
     return Min(StatOther.RFlameThrowerDamageStat,FinalInt);
 }
 

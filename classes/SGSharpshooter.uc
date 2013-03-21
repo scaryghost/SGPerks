@@ -5,7 +5,7 @@ class SGSharpshooter extends SRVeterancyTypes
 //static function int AddDamage(KFPlayerReplicationInfo KFPRI, KFMonster Injured, KFPawn Instigator, int InDamage, class<DamageType> DmgType)
 
 static function int GetPerkProgressInt( ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum ) {
-    FinalInt= 2500 * CurLevel;
+    FinalInt= 3000 * CurLevel;
     return Min(StatOther.RHeadshotKillsStat,FinalInt);
 }
 

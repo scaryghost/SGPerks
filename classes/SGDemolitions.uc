@@ -2,8 +2,8 @@ class SGDemolitions extends SRVeterancyTypes
     abstract;
 
 static function int GetPerkProgressInt(ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum) {
-    FinalInt= 100000 * CurLevel;
-    return Min(StatOther.RBullpupDamageStat,FinalInt);
+    FinalInt= 500000 * CurLevel;
+    return Min(StatOther.RExplosivesDamageStat,FinalInt);
 }
 
 static function float AddExtraAmmoFor(KFPlayerReplicationInfo KFPRI, Class<Ammunition> AmmoType) {
@@ -70,10 +70,6 @@ static function float GetAmmoCostScaling(KFPlayerReplicationInfo KFPRI, class<Pi
 static function AddDefaultInventory(KFPlayerReplicationInfo KFPRI, Pawn P) {
     KFHumanPawn(P).CreateInventoryVeterancy("KFMod.PipeBombExplosive", GetCostScaling(KFPRI, class'PipeBombPickup'));
     KFHumanPawn(P).CreateInventoryVeterancy("KFMod.M79GrenadeLauncher", GetCostScaling(KFPRI, class'M79Pickup'));
-}
-
-static function string GetCustomLevelInfo( byte Level) {
-    return Default.CustomLevelInfo;
 }
 
 defaultproperties {

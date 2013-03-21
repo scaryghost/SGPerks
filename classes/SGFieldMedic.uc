@@ -2,7 +2,7 @@ class SGFieldMedic extends SRVeterancyTypes
     abstract;
 
 static function int GetPerkProgressInt(ClientPerkRepLink StatOther, out int FinalInt, byte CurLevel, byte ReqNum) {
-    FinalInt= 500 * CurLevel;
+    FinalInt= 2500 * CurLevel;
     return Min(StatOther.RDamageHealedStat,FinalInt);
 }
 
@@ -69,10 +69,6 @@ static function float GetBodyArmorDamageModifier(KFPlayerReplicationInfo KFPRI) 
 static function AddDefaultInventory(KFPlayerReplicationInfo KFPRI, Pawn P) {
     P.ShieldStrength = 100;
     KFHumanPawn(P).CreateInventoryVeterancy("KFMod.MP7MMedicGun", GetCostScaling(KFPRI, class'MP7MPickup'));
-}
-
-static function string GetCustomLevelInfo( byte Level) {
-    return Default.CustomLevelInfo;
 }
 
 defaultproperties {
