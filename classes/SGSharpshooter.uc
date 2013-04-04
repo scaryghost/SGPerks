@@ -14,12 +14,12 @@ static function float GetHeadShotDamMulti(KFPlayerReplicationInfo KFPRI, KFPawn 
 
     // Removed extra SS Crossbow headshot damage in Round 1(added back in Round 2) and Removed Single/Dualies Damage for Hell on Earth in Round 6
     // Added Dual Deagles back in for Balance Round 7
-    if ( DmgType == class'DamTypeCrossbow' || DmgType == class'DamTypeCrossbowHeadShot' || DmgType == class'DamTypeWinchester' ||
-         DmgType == class'DamTypeDeagle' || DmgType == class'DamTypeDualDeagle' || DmgType == class'DamTypeM14EBR' ||
-          DmgType == class'DamTypeMagnum44Pistol' || DmgType == class'DamTypeDual44Magnum'
-          || DmgType == class'DamTypeMK23Pistol' || DmgType == class'DamTypeDualMK23Pistol'
-          || DmgType == class'DamTypeM99SniperRifle' || DmgType == class'DamTypeM99HeadShot' ||
-         (DmgType == class'DamTypeDualies' && KFPRI.Level.Game.GameDifficulty < 7.0) ) {
+    if ( DmgType.name == 'DamTypeCrossbow' || DmgType.name == 'DamTypeCrossbowHeadShot' || DmgType.name == 'DamTypeWinchester' ||
+         DmgType.name == 'DamTypeDeagle' || DmgType.name == 'DamTypeDualDeagle' || DmgType.name == 'DamTypeM14EBR' ||
+          DmgType.name == 'DamTypeMagnum44Pistol' || DmgType.name == 'DamTypeDual44Magnum'
+          || DmgType.name == 'DamTypeMK23Pistol' || DmgType.name == 'DamTypeDualMK23Pistol'
+          || DmgType.name == 'DamTypeM99SniperRifle' || DmgType.name == 'DamTypeM99HeadShot' ||
+         (DmgType.name == 'DamTypeDualies' && KFPRI.Level.Game.GameDifficulty < 7.0) || DmgType.name == 'DamTypeHuntingRifle') {
         ret = 1.60; // 60% increase in Crossbow/Winchester/Handcannon damage
     }
     // Reduced extra headshot damage for Single/Dualies in Hell on Earth difficulty(added in Balance Round 6)
@@ -34,10 +34,9 @@ static function float GetHeadShotDamMulti(KFPlayerReplicationInfo KFPRI, KFPawn 
 }
 
 static function float ModifyRecoilSpread(KFPlayerReplicationInfo KFPRI, WeaponFire Other, out float Recoil) {
-    if ( Crossbow(Other.Weapon) != none || Winchester(Other.Weapon) != none
-        || Single(Other.Weapon) != none || Dualies(Other.Weapon) != none
-        || Deagle(Other.Weapon) != none || DualDeagle(Other.Weapon) != none
-        || M14EBRBattleRifle(Other.Weapon) != none || M99SniperRifle(Other.Weapon) != none ) {
+    if (Other.Weapon.IsA('Crossbow') || Other.Weapon.IsA('Winchester') || Other.Weapon.IsA('Single') || Other.Weapon.IsA('Dualies') || 
+        Other.Weapon.IsA('Deagle') || Other.Weapon.IsA('DualDeagle') || Other.Weapon.IsA('M14EBRBattleRifle') || Other.Weapon.IsA('M99SniperRifle') || 
+        Other.Weapon.IsA('HUNTING_RIFLE')) {
             Recoil = 0.25; // 75% recoil reduction with Crossbow/Winchester/Handcannon
     } else {
         Recoil = 1.0;
@@ -47,19 +46,16 @@ static function float ModifyRecoilSpread(KFPlayerReplicationInfo KFPRI, WeaponFi
 
 // Modify fire speed
 static function float GetFireSpeedMod(KFPlayerReplicationInfo KFPRI, Weapon Other) {
-    if ( Winchester(Other) != none || Crossbow(Other) != none || M99SniperRifle(Other) != none) {
+    if (Other.IsA('Winchester') || Other.IsA('Crossbow') || Other.IsA('M99SniperRifle') || Other.IsA('HUNTING_RIFLE')) {
         return 1.6; // Up to 60% faster fire rate with Winchester
     }
     return 1.0;
 }
 
 static function float GetReloadSpeedModifier(KFPlayerReplicationInfo KFPRI, KFWeapon Other) {
-    if ( Crossbow(Other) != none || Winchester(Other) != none
-         || Single(Other) != none || Dualies(Other) != none
-         || Deagle(Other) != none || DualDeagle(Other) != none
-         || MK23Pistol(Other) != none || DualMK23Pistol(Other) != none
-         || M14EBRBattleRifle(Other) != none || Magnum44Pistol(Other) != none
-         || Dual44Magnum(Other) != none ) {
+    if (Other.IsA('Winchester') || Other.IsA('Single') || Other.IsA('Dualies') || 
+        Other.IsA('Deagle') || Other.IsA('DualDeagle') || Other.IsA('M14EBRBattleRifle') || Other.IsA('MK23Pistol') || 
+        Other.IsA('DualMK23Pistol') || Other.IsA('Magnum44Pistol') || Other.IsA('Dual44Magnum') || Other.IsA('HUNTING_RIFLE')) {
         return 1.6; // Up to 60% faster reload with Crossbow/Winchester/Handcannon
     }
 
@@ -68,10 +64,10 @@ static function float GetReloadSpeedModifier(KFPlayerReplicationInfo KFPRI, KFWe
 
 // Change the cost of particular items
 static function float GetCostScaling(KFPlayerReplicationInfo KFPRI, class<Pickup> Item) {
-    if ( Item == class'DeaglePickup' || Item == class'DualDeaglePickup' ||
-        Item == class'MK23Pickup' || Item == class'DualMK23Pickup' ||
-        Item == class'Magnum44Pickup' || Item == class'Dual44MagnumPickup'
-        || Item == class'M14EBRPickup' || Item == class'M99Pickup'  ) {
+    if (Item.name == 'DeaglePickup' || Item.name == 'DualDeaglePickup' ||
+        Item.name == 'MK23Pickup' || Item.name == 'DualMK23Pickup' ||
+        Item.name == 'Magnum44Pickup' || Item.name == 'Dual44MagnumPickup'
+        || Item.name == 'M14EBRPickup' || Item.name == 'M99Pickup' || Item.name == 'Hunting_RiflePickup'  ) {
         return 0.7; // Up to 70% discount on Handcannon/Dual Handcannons/EBR/44 Magnum(s)
     }
     return 1.0;
