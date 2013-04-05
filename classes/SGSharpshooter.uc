@@ -67,8 +67,8 @@ static function float GetCostScaling(KFPlayerReplicationInfo KFPRI, class<Pickup
     if (Item.name == 'DeaglePickup' || Item.name == 'DualDeaglePickup' ||
         Item.name == 'MK23Pickup' || Item.name == 'DualMK23Pickup' ||
         Item.name == 'Magnum44Pickup' || Item.name == 'Dual44MagnumPickup'
-        || Item.name == 'M14EBRPickup' || Item.name == 'M99Pickup' || Item.name == 'Hunting_RiflePickup'  ) {
-        return 0.7; // Up to 70% discount on Handcannon/Dual Handcannons/EBR/44 Magnum(s)
+        || Item.name == 'M14EBRPickup' || Item.name == 'M99Pickup' || Item.name == 'Hunting_RiflePickup') {
+        return 0.3; // Up to 70% discount on Handcannon/Dual Handcannons/EBR/44 Magnum(s)
     }
     return 1.0;
 }
