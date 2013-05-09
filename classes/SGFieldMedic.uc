@@ -48,6 +48,10 @@ static function float GetAmmoPickupMod(KFPlayerReplicationInfo KFPRI, KFAmmuniti
     return 1.0;
 }
 
+static function class<Grenade> GetNadeType(KFPlayerReplicationInfo KFPRI) {
+    return class'MedicNade'; // Grenade detonations heal nearby teammates, and cause enemies to be poisoned
+}
+
 // Change the cost of particular items
 static function float GetCostScaling(KFPlayerReplicationInfo KFPRI, class<Pickup> Item) {
     if ( Item == class'Vest' ) {
