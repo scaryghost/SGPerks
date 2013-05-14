@@ -17,6 +17,7 @@ static function float GetFireSpeedMod(KFPlayerReplicationInfo KFPRI, Weapon Othe
     if ( KFMeleeGun(Other) != none  || Crossbuzzsaw(Other) != none) {
         return 1.25;
     }
+    return 1.0;
 }
 
 static function float GetMeleeMovementSpeedModifier(KFPlayerReplicationInfo KFPRI) {
